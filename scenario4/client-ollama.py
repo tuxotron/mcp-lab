@@ -15,8 +15,8 @@ MCP_URL  = os.getenv("MCP_URL", "http://127.0.0.1:9000/mcp")
 # ----------------------------
 # Ollama configuration
 # ----------------------------
-OLLAMA_HOST = "http://ai.lab.local:11434"
-OLLAMA_MODEL = "qwen3:30b-a3b"
+OLLAMA_HOST = "http://localhost:11434"
+OLLAMA_MODEL = "qwen3-vl:235b-cloud"
 
 
 def get_token(username: str, password: str) -> str:

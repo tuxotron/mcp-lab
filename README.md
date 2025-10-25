@@ -101,8 +101,8 @@ Adjust the OLLAMA_HOST and OLLAMA_MODEL constants in `client-ollama.py`:
 # ----------------------------
 # Ollama configuration
 # ----------------------------
-OLLAMA_HOST = "http://ai.lab.local:11434"
-OLLAMA_MODEL = "qwen3:30b-a3b"
+OLLAMA_HOST = "http://127.0.0.1:11434"
+OLLAMA_MODEL = "qwen3-vl:235b-cloud"
 ```
 
 Then you could make a call like:
