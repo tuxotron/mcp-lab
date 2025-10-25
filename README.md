@@ -10,10 +10,13 @@ This lab gives you **three** progressively more advanced MCP server scenarios us
 
 ## 🚀 Quick Start
 
+For each scenario, run the following:
+
+```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-
+```
 ---
 
 ## 1) Local MCP server over **STDIO**
@@ -81,5 +84,71 @@ cd scenario3
 source .venv/bin/activate
 python client_http_keycloak.py --username alice --password password   # has role mcp-user
 python client_http_keycloak.py --username bob   --password password   # has role mcp-admin
+```
+
+## 4) Ollama tools calling
+
+Start Keycloak and MCP server from scenario 3
+
+```bash
+cd scenario4
+source .venv/bin/activate
+```
+
+Adjust the OLLAMA_HOST and OLLAMA_MODEL constants in `client-ollama.py`:
+
+```python
+# ----------------------------
+# Ollama configuration
+# ----------------------------
+OLLAMA_HOST = "http://ai.lab.local:11434"
+OLLAMA_MODEL = "qwen3:30b-a3b"
+```
+
+Then you could make a call like:
+
+```bash
+python client-ollama.py --username bob --password password --prompt "Who am I according to the server? Then say hello"
+```
+
+You should see something similar to:
+
+```
+Got token...
+Discovered MCP tools: ['whoami', 'admin_only_demo', 'hello']
+[agent] Calling tool: whoami({})
+[agent] Calling tool: hello({})
+
+agent> <think>
+...
+...
+</think>
+
+The server identifies itself as part of the "mcp-secure" service using Keycloak authentication. 
+
+Hello, bob!
+```
+
+We can try with Alice as well:
+
+```bash
+python client-ollama.py --username alice --password password --prompt "Who am I according to the server? Then say hello"
+```
+
+You should see something like:
+
+```
+Discovered MCP tools: ['whoami', 'admin_only_demo', 'hello']
+[agent] Calling tool: whoami({})
+[agent] Calling tool: hello({})
+
+agent> <think>
+...
+...
+</think>
+
+The server identifies itself as `mcp-secure` with authentication via `keycloak`. 
+
+Hello, alice! How can I assist you today?
 ```
 

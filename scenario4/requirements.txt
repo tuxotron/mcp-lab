@@ -1,0 +1,6 @@
+fastmcp 
+fastapi
+httpx 
+python-jose 
+requests
+ollama
