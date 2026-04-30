@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Scenario 1 infographic: MCP over STDIO</title>
+  <desc id="desc">A teaching diagram showing a FastMCP client spawning a local server over standard input and output, discovering tools, and calling echo, add, and now_iso.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8faf7; }
+      .title { font: 800 54px Arial, sans-serif; fill: #172033; }
+      .subtitle { font: 400 25px Arial, sans-serif; fill: #566174; }
+      .label { font: 700 25px Arial, sans-serif; fill: #172033; }
+      .body { font: 400 22px Arial, sans-serif; fill: #3f4858; }
+      .mono { font: 700 21px Menlo, Consolas, monospace; fill: #15304f; }
+      .small { font: 400 19px Arial, sans-serif; fill: #566174; }
+      .pill { font: 700 20px Arial, sans-serif; fill: #ffffff; }
+      .panel { fill: #ffffff; stroke: #d9e0ea; stroke-width: 3; rx: 24; }
+      .client { fill: #e5f0ff; stroke: #4c8ed9; }
+      .server { fill: #e6f6e8; stroke: #35a56a; }
+      .pipe { fill: #fff0d8; stroke: #d28c1f; }
+      .tool { fill: #ffffff; stroke: #b8c4d4; stroke-width: 3; rx: 18; }
+      .line { fill: none; stroke: #59677c; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .dash { fill: none; stroke: #59677c; stroke-width: 4; stroke-dasharray: 14 12; stroke-linecap: round; }
+      .num { font: 800 24px Arial, sans-serif; fill: #ffffff; }
+      .dark { fill: #172033; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#59677c"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1600" height="1000"/>
+  <rect x="70" y="58" width="1460" height="884" rx="36" fill="#ffffff" stroke="#dfe5ee" stroke-width="3"/>
+  <rect x="100" y="92" width="170" height="44" rx="22" fill="#2d7a52"/>
+  <text x="185" y="122" text-anchor="middle" class="pill">Scenario 1</text>
+  <text x="100" y="196" class="title">MCP Server over STDIO</text>
+  <text x="100" y="236" class="subtitle">A local client launches the server process and exchanges MCP messages through stdin/stdout.</text>
+
+  <rect x="130" y="330" width="350" height="260" class="panel client"/>
+  <text x="305" y="386" text-anchor="middle" class="label">FastMCP Client</text>
+  <text x="305" y="431" text-anchor="middle" class="mono">Client("server_stdio.py")</text>
+  <text x="305" y="474" text-anchor="middle" class="body">spawns process</text>
+  <text x="305" y="510" text-anchor="middle" class="body">lists tools</text>
+  <text x="305" y="546" text-anchor="middle" class="body">calls tools by name</text>
+
+  <rect x="620" y="335" width="360" height="250" class="panel pipe"/>
+  <text x="800" y="389" text-anchor="middle" class="label">STDIO Transport</text>
+  <text x="800" y="435" text-anchor="middle" class="body">No network port</text>
+  <text x="800" y="472" text-anchor="middle" class="body">Parent-child process boundary</text>
+  <text x="800" y="509" text-anchor="middle" class="body">JSON-RPC style messages</text>
+
+  <rect x="1120" y="300" width="350" height="320" class="panel server"/>
+  <text x="1295" y="354" text-anchor="middle" class="label">FastMCP Server</text>
+  <text x="1295" y="396" text-anchor="middle" class="mono">mcp.run()</text>
+  <rect x="1175" y="430" width="240" height="50" class="tool"/>
+  <text x="1295" y="462" text-anchor="middle" class="mono">echo(text)</text>
+  <rect x="1175" y="500" width="240" height="50" class="tool"/>
+  <text x="1295" y="532" text-anchor="middle" class="mono">add(a, b)</text>
+  <rect x="1175" y="570" width="240" height="50" class="tool"/>
+  <text x="1295" y="602" text-anchor="middle" class="mono">now_iso()</text>
+
+  <path class="line" marker-end="url(#arrow)" d="M480 440 H615"/>
+  <path class="line" marker-end="url(#arrow)" d="M980 440 H1115"/>
+  <path class="dash" marker-end="url(#arrow)" d="M1120 535 H985"/>
+  <path class="dash" marker-end="url(#arrow)" d="M620 535 H485"/>
+  <circle cx="550" cy="440" r="24" class="dark"/><text x="550" y="449" text-anchor="middle" class="num">1</text>
+  <circle cx="1048" cy="440" r="24" class="dark"/><text x="1048" y="449" text-anchor="middle" class="num">2</text>
+  <circle cx="1048" cy="535" r="24" class="dark"/><text x="1048" y="544" text-anchor="middle" class="num">3</text>
+  <circle cx="550" cy="535" r="24" class="dark"/><text x="550" y="544" text-anchor="middle" class="num">4</text>
+
+  <rect x="145" y="718" width="1310" height="124" rx="22" fill="#f1f5fa" stroke="#d9e0ea" stroke-width="3"/>
+  <text x="180" y="765" class="label">Teaching focus</text>
+  <text x="180" y="806" class="body">STDIO is ideal for local tools because it avoids authentication, ports, firewalls, and deployment. The client controls the process lifetime.</text>
+  <text x="180" y="848" class="small">Use this scenario to separate MCP concepts from networking concerns.</text>
+</svg>

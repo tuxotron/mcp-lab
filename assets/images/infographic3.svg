@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Scenario 3 infographic: Keycloak secured MCP</title>
+  <desc id="desc">A teaching diagram showing a client getting an ID token from Keycloak, sending it as a bearer token to a FastMCP server, and the server checking JWT roles for user and admin tools.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f8fb; }
+      .title { font: 800 54px Arial, sans-serif; fill: #172033; }
+      .subtitle { font: 400 25px Arial, sans-serif; fill: #566174; }
+      .label { font: 700 25px Arial, sans-serif; fill: #172033; }
+      .body { font: 400 22px Arial, sans-serif; fill: #3f4858; }
+      .mono { font: 700 21px Menlo, Consolas, monospace; fill: #15304f; }
+      .small { font: 400 19px Arial, sans-serif; fill: #566174; }
+      .pill { font: 700 20px Arial, sans-serif; fill: #ffffff; }
+      .panel { fill: #ffffff; stroke: #d9e0ea; stroke-width: 3; rx: 24; }
+      .client { fill: #e5f0ff; stroke: #4c8ed9; }
+      .idp { fill: #ffe7df; stroke: #d95c4f; }
+      .server { fill: #e9f7ef; stroke: #35a56a; }
+      .auth { fill: #fff1d6; stroke: #d28c1f; }
+      .tool { fill: #ffffff; stroke: #b8c4d4; stroke-width: 3; rx: 18; }
+      .line { fill: none; stroke: #59677c; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .dash { fill: none; stroke: #59677c; stroke-width: 4; stroke-dasharray: 14 12; stroke-linecap: round; }
+      .num { font: 800 24px Arial, sans-serif; fill: #ffffff; }
+      .dark { fill: #172033; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#59677c"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1600" height="1000"/>
+  <rect x="70" y="58" width="1460" height="884" rx="36" fill="#ffffff" stroke="#dfe5ee" stroke-width="3"/>
+  <rect x="100" y="92" width="170" height="44" rx="22" fill="#b34b42"/>
+  <text x="185" y="122" text-anchor="middle" class="pill">Scenario 3</text>
+  <text x="100" y="196" class="title">Keycloak Secures the MCP Endpoint</text>
+  <text x="100" y="236" class="subtitle">Authentication happens before the tool call; authorization happens inside the server using JWT roles.</text>
+
+  <rect x="120" y="320" width="320" height="260" class="panel client"/>
+  <text x="280" y="375" text-anchor="middle" class="label">Client</text>
+  <text x="280" y="420" text-anchor="middle" class="body">username + password</text>
+  <text x="280" y="458" text-anchor="middle" class="mono">auth=token</text>
+  <text x="280" y="496" text-anchor="middle" class="small">FastMCP sets Authorization</text>
+
+  <rect x="530" y="290" width="330" height="210" class="panel idp"/>
+  <text x="695" y="345" text-anchor="middle" class="label">Keycloak</text>
+  <text x="695" y="389" text-anchor="middle" class="mono">realm: mcp-lab</text>
+  <text x="695" y="427" text-anchor="middle" class="mono">client: mcp-client</text>
+  <text x="695" y="465" text-anchor="middle" class="body">issues ID token</text>
+
+  <rect x="525" y="565" width="340" height="120" class="panel auth"/>
+  <text x="695" y="613" text-anchor="middle" class="label">JWT Claims</text>
+  <text x="695" y="653" text-anchor="middle" class="mono">preferred_username</text>
+  <text x="695" y="681" text-anchor="middle" class="mono">realm_access.roles</text>
+
+  <rect x="980" y="305" width="480" height="330" class="panel server"/>
+  <text x="1220" y="360" text-anchor="middle" class="label">Secure FastMCP Server</text>
+  <text x="1220" y="401" text-anchor="middle" class="mono">JWTVerifier(issuer, jwks, audience)</text>
+  <rect x="1030" y="445" width="185" height="50" class="tool"/>
+  <text x="1122" y="477" text-anchor="middle" class="mono">whoami()</text>
+  <rect x="1240" y="445" width="185" height="50" class="tool"/>
+  <text x="1332" y="477" text-anchor="middle" class="mono">hello()</text>
+  <rect x="1120" y="525" width="255" height="50" class="tool"/>
+  <text x="1248" y="557" text-anchor="middle" class="mono">admin_only_demo()</text>
+
+  <path class="line" marker-end="url(#arrow)" d="M440 380 H525"/>
+  <path class="dash" marker-end="url(#arrow)" d="M530 455 H445"/>
+  <path class="line" marker-end="url(#arrow)" d="M440 520 C610 535 790 535 975 450"/>
+  <path class="dash" marker-end="url(#arrow)" d="M1075 635 C960 710 705 725 610 688"/>
+  <path class="line" marker-end="url(#arrow)" d="M860 395 H975"/>
+  <path class="line" marker-end="url(#arrow)" d="M1220 635 C1220 720 820 730 735 688"/>
+
+  <circle cx="485" cy="380" r="24" class="dark"/><text x="485" y="389" text-anchor="middle" class="num">1</text>
+  <circle cx="485" cy="455" r="24" class="dark"/><text x="485" y="464" text-anchor="middle" class="num">2</text>
+  <circle cx="730" cy="535" r="24" class="dark"/><text x="730" y="544" text-anchor="middle" class="num">3</text>
+  <circle cx="920" cy="395" r="24" class="dark"/><text x="920" y="404" text-anchor="middle" class="num">4</text>
+  <circle cx="1025" cy="685" r="24" class="dark"/><text x="1025" y="694" text-anchor="middle" class="num">5</text>
+
+  <rect x="145" y="760" width="1310" height="108" rx="22" fill="#f1f5fa" stroke="#d9e0ea" stroke-width="3"/>
+  <text x="180" y="807" class="label">Teaching focus</text>
+  <text x="180" y="848" class="body">Alice has mcp-user access; Bob has mcp-admin access. The bearer token proves identity, while role checks decide which tool behavior is allowed.</text>
+</svg>

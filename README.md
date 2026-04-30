@@ -1,10 +1,18 @@
 # Model Context Protocol Lab (Python + FastMCP)
 
-This lab gives you **three** progressively more advanced MCP server scenarios using the **FastMCP** library:
+This lab gives you **five** progressively more advanced tool and MCP scenarios:
 
-1) **Local server over STDIO** (no network, great for local tools)
-2) **HTTP (Streamable HTTP) server** without auth
-3) **HTTP (Streamable HTTP) server** protected by **Keycloak** (OIDC), with JWT-based **authentication + role-based authorization**
+0) **Direct Ollama tool calling** without MCP
+1) **Local MCP server over STDIO** (no network, great for local tools)
+2) **HTTP (Streamable HTTP) MCP server** without auth
+3) **HTTP (Streamable HTTP) MCP server** protected by **Keycloak** (OIDC), with JWT-based **authentication + role-based authorization**
+4) **Ollama agent** using tools discovered from the secure MCP server
+
+---
+
+## Teaching Infographics
+
+Open `lab_concepts.html` in a browser to view the five scenario infographics. The individual SVG files are in `assets/images/infographic0.svg` through `assets/images/infographic4.svg`.
 
 ---
 
@@ -18,6 +26,13 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 ---
+## 0) In the beginning there were tools
+
+```bash
+cd scenario0
+source .venv/bin/activate
+python app.py
+```
 
 ## 1) Local MCP server over **STDIO**
 
@@ -151,4 +166,3 @@ The server identifies itself as `mcp-secure` with authentication via `keycloak`.
 
 Hello, alice! How can I assist you today?
 ```
-

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Scenario 0 infographic: Direct Ollama tool calling</title>
+  <desc id="desc">A teaching diagram showing a local CLI assistant sending messages and tool schemas to Ollama, executing local Python tools, and returning tool results back to the model.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f8fb; }
+      .title { font: 800 54px Arial, sans-serif; fill: #172033; }
+      .subtitle { font: 400 25px Arial, sans-serif; fill: #566174; }
+      .label { font: 700 25px Arial, sans-serif; fill: #172033; }
+      .body { font: 400 22px Arial, sans-serif; fill: #3f4858; }
+      .mono { font: 700 21px Menlo, Consolas, monospace; fill: #15304f; }
+      .small { font: 400 19px Arial, sans-serif; fill: #566174; }
+      .pill { font: 700 20px Arial, sans-serif; fill: #ffffff; }
+      .panel { fill: #ffffff; stroke: #d9e0ea; stroke-width: 3; rx: 24; }
+      .blue { fill: #dff0ff; stroke: #4c8ed9; }
+      .green { fill: #e3f6ea; stroke: #35a56a; }
+      .amber { fill: #fff1d6; stroke: #d28c1f; }
+      .red { fill: #ffe3e0; stroke: #d95c4f; }
+      .dark { fill: #172033; }
+      .line { fill: none; stroke: #59677c; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .dash { fill: none; stroke: #59677c; stroke-width: 4; stroke-dasharray: 14 12; stroke-linecap: round; }
+      .num { font: 800 24px Arial, sans-serif; fill: #ffffff; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#59677c"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1600" height="1000"/>
+  <rect x="70" y="58" width="1460" height="884" rx="36" fill="#ffffff" stroke="#dfe5ee" stroke-width="3"/>
+  <rect x="100" y="92" width="170" height="44" rx="22" fill="#2f6fb2"/>
+  <text x="185" y="122" text-anchor="middle" class="pill">Scenario 0</text>
+  <text x="100" y="196" class="title">Direct Tool Calling with Ollama</text>
+  <text x="100" y="236" class="subtitle">No MCP server yet: the assistant owns the tool schemas, dispatch table, and result loop.</text>
+
+  <rect x="125" y="330" width="300" height="210" class="panel blue"/>
+  <text x="275" y="385" text-anchor="middle" class="label">Student Prompt</text>
+  <text x="275" y="430" text-anchor="middle" class="body">"What time is it?"</text>
+  <text x="275" y="466" text-anchor="middle" class="body">"Weather for 10001"</text>
+
+  <rect x="505" y="302" width="330" height="266" class="panel"/>
+  <text x="670" y="358" text-anchor="middle" class="label">CLI Conversation Loop</text>
+  <text x="545" y="410" class="body">Builds messages</text>
+  <text x="545" y="448" class="body">Sends JSON tool schemas</text>
+  <text x="545" y="486" class="body">Executes requested function</text>
+  <text x="545" y="524" class="body">Appends tool result</text>
+
+  <rect x="920" y="330" width="300" height="210" class="panel amber"/>
+  <text x="1070" y="385" text-anchor="middle" class="label">Ollama Chat</text>
+  <text x="1070" y="430" text-anchor="middle" class="body">Chooses when a tool</text>
+  <text x="1070" y="466" text-anchor="middle" class="body">call is useful</text>
+
+  <rect x="1240" y="292" width="235" height="126" class="panel green"/>
+  <text x="1358" y="342" text-anchor="middle" class="label">Tool Schema</text>
+  <text x="1358" y="380" text-anchor="middle" class="mono">name + params</text>
+  <rect x="1240" y="470" width="235" height="126" class="panel green"/>
+  <text x="1358" y="520" text-anchor="middle" class="label">Python Tool</text>
+  <text x="1358" y="558" text-anchor="middle" class="mono">TOOL_MAP[name]</text>
+
+  <path class="line" marker-end="url(#arrow)" d="M425 435 H500"/>
+  <path class="line" marker-end="url(#arrow)" d="M835 415 H915"/>
+  <path class="dash" marker-end="url(#arrow)" d="M1220 365 H1235"/>
+  <path class="line" marker-end="url(#arrow)" d="M1070 540 C1070 642 1358 642 1358 600"/>
+  <path class="line" marker-end="url(#arrow)" d="M1240 535 H840"/>
+  <path class="line" marker-end="url(#arrow)" d="M670 568 C670 665 275 665 275 545"/>
+
+  <circle cx="464" cy="435" r="24" class="dark"/><text x="464" y="444" text-anchor="middle" class="num">1</text>
+  <circle cx="878" cy="415" r="24" class="dark"/><text x="878" y="424" text-anchor="middle" class="num">2</text>
+  <circle cx="1165" cy="600" r="24" class="dark"/><text x="1165" y="609" text-anchor="middle" class="num">3</text>
+  <circle cx="1040" cy="535" r="24" class="dark"/><text x="1040" y="544" text-anchor="middle" class="num">4</text>
+  <circle cx="470" cy="665" r="24" class="dark"/><text x="470" y="674" text-anchor="middle" class="num">5</text>
+
+  <rect x="145" y="718" width="1310" height="124" rx="22" fill="#f1f5fa" stroke="#d9e0ea" stroke-width="3"/>
+  <text x="180" y="765" class="label">Teaching focus</text>
+  <text x="180" y="806" class="body">The model never executes code by itself. The host application advertises tools, receives a tool-call request, runs trusted local code, then feeds the result back into the conversation.</text>
+  <text x="180" y="848" class="small">Concrete tools in this lab: get_current_time() and get_weather(zip_code).</text>
+</svg>
