@@ -1,12 +1,13 @@
 # Model Context Protocol Lab (Python + FastMCP)
 
-This lab gives you **five** progressively more advanced tool and MCP scenarios:
+This lab gives you **six** progressively more advanced tool and MCP scenarios:
 
 0) **Direct Ollama tool calling** without MCP
 1) **Local MCP server over STDIO** (no network, great for local tools)
 2) **HTTP (Streamable HTTP) MCP server** without auth
 3) **HTTP (Streamable HTTP) MCP server** protected by **Keycloak** (OIDC), with JWT-based **authentication + role-based authorization**
 4) **Ollama agent** using tools discovered from the secure MCP server
+5) **SQLite data authorization**: vulnerable LLM-side filtering versus secure tool-side filtering
 
 ---
 
@@ -166,3 +167,15 @@ The server identifies itself as `mcp-secure` with authentication via `keycloak`.
 
 Hello, alice! How can I assist you today?
 ```
+
+---
+
+## 5) Never use the LLM as a data authorization boundary
+
+This scenario uses authenticated MCP tools and a local SQLite database to compare:
+
+- a vulnerable tool that returns every user's records and asks the LLM to filter them;
+- a fixed tool that derives the caller from the verified token and filters in SQL.
+
+See [`scenario5/README.md`](scenario5/README.md) for the walkthrough, adversarial
+prompt demo, and tests.
