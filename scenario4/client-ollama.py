@@ -15,8 +15,11 @@ MCP_URL  = os.getenv("MCP_URL", "http://127.0.0.1:9000/mcp")
 # ----------------------------
 # Ollama configuration
 # ----------------------------
-OLLAMA_HOST = "http://localhost:11434"
-OLLAMA_MODEL = "qwen3-vl:235b-cloud"
+# OLLAMA_HOST = "http://localhost:11434"
+# OLLAMA_MODEL = "qwen3.6:27b-coding-mxfp8"
+
+OLLAMA_HOST = "http://localhost:11234"
+OLLAMA_MODEL = "ddalcu/Qwen3.8-Flash-Next-MLX-Serve-mixed-4-8bit"
 
 
 def get_token(username: str, password: str) -> str:
@@ -49,7 +52,7 @@ def mcp_tools_to_ollama(tools: List[Any]) -> List[Dict[str, Any]]:
     for t in tools:
         name = getattr(t, "name", None) #or t.get("name")
         desc = getattr(t, "description", None) #or t.get("description") or ""
-        schema = getattr(t, "inputSchema", None) or t.get("inputSchema") or {"type": "object", "properties": {}}
+        schema = getattr(t, ".inputSchema", None) or {"type": "object", "properties": {}} # t.get("inputSchema") or {"type": "object", "properties": {}}
         out.append({
             "type": "function",
             "function": {
